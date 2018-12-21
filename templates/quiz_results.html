@@ -1,0 +1,50 @@
+{% include 'header.html' %}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="btn-group" role="group" aria-label="Button group">
+            <a role="button" class="btn btn-success mb-2" href="/login">Login</a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-12">
+        {% if results %}
+        <h2>List of Results</h2>
+        <div class="table-responsive">
+            <table class="table table-sm thead-light table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Student ID</th>
+                        <th scope="col">Quiz ID</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Subject</th>
+                        <th scope="col">Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in results %}
+                    <tr>
+                        <td scope="col">{{ result.id }}</td>
+                        <td scope="col">{{ result.student_id }}</td>
+                        <td scope="col">{{ result.quiz_id }}</td>
+                        <td scope="col">{{ result.date }}</td>
+                        <td scope="col">{{ result.subject }}</td>
+                        <td scope="col">{{ result.score }}</td>
+                    </tr>
+                    {% endfor %} 
+                </tbody>       
+            </table>
+        </div>
+        {% else %}
+            <h2>No results</h2>
+        {% endif %}
+    </div>
+</div>
+
+
+
+{% include 'footer.html' %}

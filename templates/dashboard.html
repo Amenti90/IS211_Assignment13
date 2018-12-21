@@ -1,0 +1,85 @@
+{% include 'header.html' %}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="btn-group" role="group" aria-label="Button group">
+            <a role="button" class="btn btn-primary mb-2" href="/student/add">Add Student</a>
+            <a role="button" class="btn btn-success mb-2" href="/quiz/add">Add Quiz</a>
+            <a role="button" class="btn btn-danger mb-2" href="/logout">Logout</a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-4">
+        <h2>List of Students</h2>
+        <div class="table-responsive">
+            <table class="table table-sm thead-light table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                    <tr>
+                        <td scope="col">
+                            <a href="/student/{{ student.id }}" class="btn btn-sm btn-primary">{{ student.id }}</a>
+                        </td>
+                        <td scope="col">{{ student.firstname }}</td>
+                        <td scope="col">{{ student.lastname }}</td>
+                        <td scope="col">
+                            <form action="/student/delete" method="POST">
+                                <input type="hidden" name="id" value="{{ student.id }}">
+                                <input type="submit" role="button" class="btn btn-sm btn-danger" value="Delete">
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %} 
+                </tbody>       
+            </table>
+        </div>
+    </div>
+    
+
+    <div class="col-md-8">
+        <h2>List of Quizzes</h2>
+        <div class="table-responsive">
+            <table class="table table-sm thead-light table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Subject</th>
+                        <th scope="col">No. of Questions</th>
+                        <th scope="col">Date</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for quiz in quizzes %}
+                    <tr>
+                        <td scope="col">{{ quiz.id }}</td>
+                        <td scope="col">{{ quiz.subject }}</td>
+                        <td scope="col">{{ quiz.no_of_questions }}</td>
+                        <td scope="col">{{ quiz.date }}</td>
+                        <td scope="col">
+                            <form action="/quiz/delete" method="POST">
+                                <input type="hidden" name="id" value="{{ quiz.id }}">
+                                <input type="submit" role="button" class="btn btn-sm btn-danger" value="Delete">
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %} 
+                </tbody>       
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+{% include 'footer.html' %}
